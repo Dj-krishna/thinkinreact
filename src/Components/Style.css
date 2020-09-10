@@ -1,0 +1,27 @@
+#main{
+    text-align: center;
+    border: 1px solid red;
+
+}
+table{
+    width: 100%;
+    border: 1px solid blue;
+    border-spacing:10px;
+}
+
+.tbody
+{
+    border: 1px solid green;
+}
+
+.thead{
+    border: 1px solid black;
+}
+
+#form{
+    border: 1px solid blue;
+    text-align: center;
+}
+.row{
+    border: 1px;
+}
