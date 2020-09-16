@@ -1,16 +1,26 @@
 import React from 'react'
-import {shallow} from 'enzyme';
+import {shallow, configure} from 'enzyme';
 import FilterableProductTable from '../Components/FilterableProductTable';
 import SearchBar from '../Components/SearchBar';
 import ProductTable from '../Components/ProductTable';
+import Adapter from 'enzyme-adapter-react-16';
+import PRODUCTS from '../Components/Products';
+
+configure({ adapter: new Adapter() });
+
+
 
 describe('<FilterableProductTable />', () => {
     // let filterableProductTableComponent;
 it('should render FilterableProductTable', () => {
-    const wrapper = shallow(<FilterableProductTable />)
-
+    const wrapper = shallow(<FilterableProductTable products={PRODUCTS} />)
+    // const productTable = wrapper.find(ProductTable)
+    // const fakeUser = { category: 'Sporting Goods', price: '$49.99', stocked: true, name: 'Football' }
     expect(wrapper).not.toBeNull();
-    expect(wrapper).length.toBe(1);   
+    expect(wrapper.props('products')).toEqual({PRODUCTS});
+    // expect(productTable.props().children).toBe();
+    // expect(wrapper.products.textContent).toBe(fakeUser.category);
+      
 })
 
 it('should render search bar component', () => {
@@ -23,9 +33,13 @@ it('should render search bar component', () => {
 })
 
 it('should render product table', () =>{
-    const productTable = shallow(<ProductTable />)
+    const fakeUser = { category: 'Sporting Goods', price: '$49.99', stocked: true, name: 'Football' }
+    const productTable = shallow(<ProductTable products={fakeUser}/>)
+
+    const item = productTable.find(".tbody")
+
     expect(productTable).not.toBeNull();
-    expect(productTable.find('.table').length).toBe(1);
-    expect(productTable.find('.tbody').length).toBe(1);
+    expect(item.length).toHaveLength(fakeUser.length);
+    expect(item.first().text()).toEqual('Sporting Goods');
 })
 })
