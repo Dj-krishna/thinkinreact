@@ -14,13 +14,8 @@ describe('<FilterableProductTable />', () => {
     // let filterableProductTableComponent;
 it('should render FilterableProductTable', () => {
     const wrapper = shallow(<FilterableProductTable products={PRODUCTS} />)
-    // const productTable = wrapper.find(ProductTable)
-    // const fakeUser = { category: 'Sporting Goods', price: '$49.99', stocked: true, name: 'Football' }
     expect(wrapper).not.toBeNull();
-    expect(wrapper.props('products')).toEqual({PRODUCTS});
-    // expect(productTable.props().children).toBe();
-    // expect(wrapper.products.textContent).toBe(fakeUser.category);
-      
+    expect(wrapper.find('ProductTable').length).toBe(1);
 })
 
 it('should render search bar component', () => {
@@ -33,13 +28,12 @@ it('should render search bar component', () => {
 })
 
 it('should render product table', () =>{
-    const fakeUser = { category: 'Sporting Goods', price: '$49.99', stocked: true, name: 'Football' }
-    const productTable = shallow(<ProductTable products={fakeUser}/>)
-
-    const item = productTable.find(".tbody")
+    const fakeUser = [{ category: 'Sporting Goods', price: '$49.99', stocked: true, name: 'Football' }]
+    const productTable = shallow(<ProductTable products={fakeUser} inStockOnly={false} filterText={''}/>)
 
     expect(productTable).not.toBeNull();
-    expect(item.length).toHaveLength(fakeUser.length);
-    expect(item.first().text()).toEqual('Sporting Goods');
+    expect(productTable.find('.tbody').length).toBe(1);
+    // expect(productTable.find('tbody').length).toHaveLength(fakeUser.length);
+    // expect(item.first().text()).toEqual('Sporting Goods');
 })
 })
